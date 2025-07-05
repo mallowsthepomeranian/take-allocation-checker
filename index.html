@@ -14,7 +14,7 @@
       min-height: 100vh;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 320px; /* adjust if header image changes */
+      padding-top: 320px;
     }
 
     input[type="text"] {
@@ -52,6 +52,20 @@
       border-radius: 12px;
     }
 
+    #clickCounter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      text-shadow: 1px 1px black;
+      z-index: 999;
+    }
+
     footer {
       margin-top: 60px;
       font-size: 14px;
@@ -63,76 +77,89 @@
 <body>
 
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
-<h1 style="color: white; font-size: 36px; text-shadow: 1px 1px #000;">$TAKE allocation checker</h1>
+
+  <h1 style="color: white; font-size: 36px; text-shadow: 1px 1px #000;">$TAKE allocation checker</h1>
 
   <input type="text" id="address" placeholder="enter your address here">
   <button onclick="checkAllocation()">CHECK</button>
 
   <div id="output"></div>
+  <div id="clickCounter"></div>
 
   <footer>
     checker made by Mallows, Music by Mr.Bboga
   </footer>
 
-<script>
-  const part1 = "it's a prank! 🤡 You didn't win anything 😅 but i have a message for you:";
+  <script>
+    const part1 = "🛑 This is just a prank checker. You didn't win anything 😅\n\nBut here's something to keep you going:";
 
-  const messages = [
-    "But hey — you didn’t win $TAKE today, but you did win the chance to keep grinding in Overtake World. That’s worth more than a meme airdrop 💸🔥",
-    "Still no $TAKE? Shocking. Not really. But Overtake World isn't handing bags to quitters — stay in the race 🏎️💨",
-    "The ones who stick with Overtake World? They'll laugh last and laugh loudest 😂📈 That’s how the meta shifts.",
-    "Rugged by the blockchain? No. But $TAKE rewards don’t come to those who log off early 👀 Keep your wallet and your spirit open.",
-    "This is your character arc 🧙 The chapter where you keep showing up. Overtake World isn’t finished — it’s just beginning 🔥",
-    "You’re early, poor, and full of conviction 💼 That’s the holy trinity for making it in Overtake World 🚀",
-    "The real alpha isn’t in winning today. It’s in knowing that $TAKE is for the long-haulers, not the lurkers 🐢",
-    "No airdrop. No problem. The early crew in Overtake World are shaping the future. One grind at a time 🔧🧠",
-    "Vibes aren’t just vibes — they’re fuel. Keep the energy up, and let $TAKE follow the effort ⚡🎮",
-    "Most people left after clicking once. You? You’re still here. That’s why $TAKE will eventually find its way to you 💎🙌",
-    "Overtake World isn’t hype. It’s habit. You’re not early by chance — you’re early by choice 🧠🫡",
-    "You're building conviction in silence. While everyone else is chasing pumps, you’re focused on purpose. $TAKE sees that 🧐",
-    "People will forget this checker — but they won’t forget who stayed when $TAKE was still underground 🔦",
-    "It’s easy to get distracted in Web3. But Overtake World is built for those who don’t flinch when the room gets quiet 🔇💥",
-    "Imagine being around before the storm — that’s where you are. $TAKE is coming. Stay in the eye of it 🌪️",
-    "You’re not farming tokens — you’re farming time, trust, and timing ⏱️ That’s what Overtake World will reward.",
-    "$TAKE isn't for the loud, it's for the locked-in 🧠 Keep stacking patience and Overtake World will stack with you.",
-    "You've seen too much to quit now. Keep going. The ones who believe in Overtake before the crowd? They always win 🏆",
-    "In a space full of exit liquidity, you're actually learning. That's your edge. That's your $TAKE ticket 🎟️",
-    "You're not just checking — you’re showing up. And that’s the exact thing Overtake World was made for 🧭🔥",
-    "$TAKE TGE is right around the corner, and this is not the time to go quiet. Keep grinding in-game, keep yapping online, and make sure the world hears your hunger. The real ones will be ready when it drops.",
-    "$TAKE TGE is coming in hot — and it’s not just about being early, it’s about being visible. Keep showing up, keep making noise, keep letting everyone know you’re not here to play... you’re here to $TAKE.",
-    "The $TAKE TGE isn’t just a moment — it’s the moment. And right now, every bit of grinding, tweeting, posting, and hyping counts. This is how winners warm up before they win big. Keep yapping loud and proud.",
-    "As the $TAKE TGE approaches, the silent ones fade while the loud ones rise. Keep grinding like your wallet depends on it, and keep yapping like you already know what’s coming — because you do.",
-    "$TAKE TGE is almost here, and the game doesn't reward the quiet. Stay loud, stay sharp, and don’t slow down now. This is the final lap before the spotlight hits — and your grind will speak volumes.",
-    "$TAKE TGE is nearly upon us. The ones who kept pushing, shouting, grinding, and showing up every day? They’ll be the ones holding the bags. So keep the energy high — this is your pre-TGE power-up.",
-    "With $TAKE TGE approaching fast, now is the time to be relentless. Don’t just play. Build. Don’t just talk. Echo. The louder and more active you are, the more undeniable you become when that moment hits.",
-    "Every tweet, every post, every game session — it’s all part of the momentum before $TAKE TGE. So keep the foot on the gas, keep your noise levels up, and let the timeline know you're not just early — you're everywhere.",
-    "$TAKE TGE is almost live. If you're not grinding harder and yapping louder right now, you’re missing the best part of the buildup. Momentum is currency, and you’re either stacking it or watching others cash it in.",
-    "$TAKE TGE isn't a finish line — it's the launch pad. So keep stacking your presence, keep grinding with purpose, and yap like the mic’s finally yours. History remembers the loud, the active, and the relentless."
-  ];
+    const messages = [
+      "But hey — you didn’t win $TAKE today, but you did win the chance to keep grinding in Overtake World. That’s worth more than a meme airdrop 💸🔥",
+      "Still no $TAKE? Shocking. Not really. But Overtake World isn't handing bags to quitters — stay in the race 🏎️💨",
+      "The ones who stick with Overtake World? They'll laugh last and laugh loudest 😂📈 That’s how the meta shifts.",
+      "Rugged by the blockchain? No. But $TAKE rewards don’t come to those who log off early 👀 Keep your wallet and your spirit open.",
+      "This is your character arc 🧙 The chapter where you keep showing up. Overtake World isn’t finished — it’s just beginning 🔥",
+      "You’re early, poor, and full of conviction 💼 That’s the holy trinity for making it in Overtake World 🚀",
+      "The real alpha isn’t in winning today. It’s in knowing that $TAKE is for the long-haulers, not the lurkers 🐢",
+      "No airdrop. No problem. The early crew in Overtake World are shaping the future. One grind at a time 🔧🧠",
+      "Vibes aren’t just vibes — they’re fuel. Keep the energy up, and let $TAKE follow the effort ⚡🎮",
+      "Most people left after clicking once. You? You’re still here. That’s why $TAKE will eventually find its way to you 💎🙌",
+      "Overtake World isn’t hype. It’s habit. You’re not early by chance — you’re early by choice 🧠🫡",
+      "You're building conviction in silence. While everyone else is chasing pumps, you’re focused on purpose. $TAKE sees that 🧐",
+      "People will forget this checker — but they won’t forget who stayed when $TAKE was still underground 🔦",
+      "It’s easy to get distracted in Web3. But Overtake World is built for those who don’t flinch when the room gets quiet 🔇💥",
+      "Imagine being around before the storm — that’s where you are. $TAKE is coming. Stay in the eye of it 🌪️",
+      "You’re not farming tokens — you’re farming time, trust, and timing ⏱️ That’s what Overtake World will reward.",
+      "$TAKE isn't for the loud, it's for the locked-in 🧠 Keep stacking patience and Overtake World will stack with you.",
+      "You've seen too much to quit now. Keep going. The ones who believe in Overtake before the crowd? They always win 🏆",
+      "In a space full of exit liquidity, you're actually learning. That's your edge. That's your $TAKE ticket 🎟️",
+      "You're not just checking — you’re showing up. And that’s the exact thing Overtake World was made for 🧭🔥",
+      "$TAKE TGE is right around the corner. Don’t stop grinding now — this is the final lap 🏁",
+      "$TAKE isn't a meme. It's a mission. Stay loud, stay real, and watch how it pays 🧠📈",
+      "Keep stacking effort. $TAKE rewards the ones who don’t ask when, they just show up 🔁",
+      "Still early, still building. $TAKE doesn’t rush — and neither should you 🛠️🕰️",
+      "The best part of $TAKE is watching others doubt — then realizing you were right all along 💥😎"
+    ];
 
-  function checkAllocation() {
-    const input = document.getElementById("address").value.trim();
+    let clickCount = localStorage.getItem("clickCount")
+      ? parseInt(localStorage.getItem("clickCount"))
+      : 0;
 
-    if (input === "") {
-      alert("Please enter your address first.");
-      return;
+    function updateCounter() {
+      clickCount++;
+      localStorage.setItem("clickCount", clickCount);
+      document.getElementById("clickCounter").innerText =
+        `${clickCount} users already checked their allocations and had been motivated 💪`;
     }
 
-    const sound = document.getElementById("clickSound");
-    if (sound) {
-      sound.currentTime = 0;
-      sound.play().catch((e) => {
-        console.log("Autoplay blocked or error:", e);
-      });
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("clickCounter").innerText =
+        `${clickCount} users already checked their allocations and had been motivated 💪`;
+    });
+
+    function checkAllocation() {
+      const input = document.getElementById("address").value.trim();
+
+      if (input === "") {
+        alert("Please enter your address first.");
+        return;
+      }
+
+      const sound = document.getElementById("clickSound");
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch((e) => {
+          console.log("Autoplay blocked or error:", e);
+        });
+      }
+
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      const finalMessage = `${part1}\n\n${messages[randomIndex]}`;
+      document.getElementById("output").innerText = finalMessage;
+
+      updateCounter();
     }
-
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    const finalMessage = `${part1}\n\n${messages[randomIndex]}`;
-    document.getElementById("output").innerText = finalMessage;
-  }
-</script>
-
-
+  </script>
 
 </body>
 </html>
