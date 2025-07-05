@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$TAKE Allocation Checker</title>
+  <style>
+    body {
+      background-color: #c0d8ee;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #0099ff;
+      text-shadow: 1px 1px white;
+    }
+
+    input[type="text"] {
+      width: 600px;
+      padding: 15px;
+      font-size: 16px;
+      border: 1px solid #000;
+      margin: 20px auto;
+      display: block;
+    }
+
+    button {
+      background-color: goldenrod;
+      border: 2px solid white;
+      padding: 10px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      box-shadow: 2px 2px #8b6b00;
+    }
+
+    #output {
+      width: 80%;
+      height: 200px;
+      background-color: #a9c2da;
+      margin: 40px auto;
+      padding: 20px;
+      font-size: 18px;
+      color: #000;
+      text-align: center;
+      line-height: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>$TAKE allocation checker</h1>
+  <input type="text" id="address" placeholder="enter your address here">
+  <button onclick="checkAllocation()">CHECK</button>
+
+  <div id="output"></div>
+
+  <script>
+    const messages = [
+      "You have been allocated 1,000 $TAKE!",
+      "Congratulations! You’re eligible for 5,000 $TAKE.",
+      "No allocation found for this address.",
+      "Please try again later.",
+      "You’ve earned early supporter rewards!"
+    ];
+
+    function checkAllocation() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("output").innerText = messages[randomIndex];
+    }
+  </script>
+
+</body>
+</html>
