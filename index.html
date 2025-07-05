@@ -73,6 +73,10 @@
       text-shadow: 1px 1px black;
     }
   </style>
+
+  <!-- Firebase SDKs for browser -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -91,6 +95,23 @@
   </footer>
 
   <script>
+    // Firebase Config (from your credentials)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCa4izJF4oxlPKFgTQ5OZo4iUt_LQQu5LE",
+      authDomain: "take-counter.firebaseapp.com",
+      databaseURL: "https://take-counter-default-rtdb.firebaseio.com",
+      projectId: "take-counter",
+      storageBucket: "take-counter.firebasestorage.app",
+      messagingSenderId: "643642147528",
+      appId: "1:643642147528:web:3ae30377a2c365343d5bfd",
+      measurementId: "G-DP8FX0CP2X"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const counterRef = db.ref("clickCount");
+
     const part1 = "🛑 This is just a prank checker. You didn't win anything 😅\n\nBut here's something to keep you going:";
 
     const messages = [
@@ -113,28 +134,27 @@
       "$TAKE isn't for the loud, it's for the locked-in 🧠 Keep stacking patience and Overtake World will stack with you.",
       "You've seen too much to quit now. Keep going. The ones who believe in Overtake before the crowd? They always win 🏆",
       "In a space full of exit liquidity, you're actually learning. That's your edge. That's your $TAKE ticket 🎟️",
-      "You're not just checking — you’re showing up. And that’s the exact thing Overtake World was made for 🧭🔥",
-      "$TAKE TGE is right around the corner. Don’t stop grinding now — this is the final lap 🏁",
-      "$TAKE isn't a meme. It's a mission. Stay loud, stay real, and watch how it pays 🧠📈",
-      "Keep stacking effort. $TAKE rewards the ones who don’t ask when, they just show up 🔁",
-      "Still early, still building. $TAKE doesn’t rush — and neither should you 🛠️🕰️",
-      "The best part of $TAKE is watching others doubt — then realizing you were right all along 💥😎"
+      "You're not just checking — you’re showing up. And that’s the exact thing Overtake World was made for 🧭🔥"
     ];
 
-    let clickCount = localStorage.getItem("clickCount")
-      ? parseInt(localStorage.getItem("clickCount"))
-      : 0;
+    let clickCount = 0;
 
-    function updateCounter() {
-      clickCount++;
-      localStorage.setItem("clickCount", clickCount);
+    function displayCounter() {
       document.getElementById("clickCounter").innerText =
         `${clickCount} users already checked their allocations and had been motivated 💪`;
     }
 
+    function updateCounter() {
+      clickCount++;
+      counterRef.set(clickCount);
+      displayCounter();
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("clickCounter").innerText =
-        `${clickCount} users already checked their allocations and had been motivated 💪`;
+      counterRef.on("value", (snapshot) => {
+        clickCount = snapshot.val() || 0;
+        displayCounter();
+      });
     });
 
     function checkAllocation() {
