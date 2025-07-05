@@ -5,16 +5,11 @@
   <title>$TAKE Allocation Checker</title>
   <style>
     body {
-      background-color: #c0d8ee;
+      background: url('bg.jpg') no-repeat center top;
+      background-size: cover;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 50px;
-    }
-
-    h1 {
-      font-size: 40px;
-      color: #0099ff;
-      text-shadow: 1px 1px white;
+      padding-top: 320px; /* Adjust depending on your header height */
     }
 
     input[type="text"] {
@@ -37,25 +32,24 @@
       box-shadow: 2px 2px #8b6b00;
     }
 
- #output {
-    width: 80%;
-    height: 200px;
-    background-color: #a9c2da;
-    margin: 40px auto;
-    padding: 20px;
-    font-size: 24px; /* increased from 18px */
-    color: #000;
-    text-align: center;
-    line-height: 1.6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    #output {
+      width: 80%;
+      min-height: 200px;
+      background-color: rgba(169, 194, 218, 0.9);
+      margin: 40px auto;
+      padding: 20px;
+      font-size: 24px;
+      color: #000;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
 
-  <h1>$TAKE allocation checker</h1>
   <input type="text" id="address" placeholder="enter your address here">
   <button onclick="checkAllocation()">CHECK</button>
 
