@@ -93,11 +93,20 @@ function checkAllocation() {
     return;
   }
 
+  // Play sound
+  document.getElementById("clickSound").play();
+
   const randomIndex = Math.floor(Math.random() * messages.length);
   document.getElementById("output").innerText = messages[randomIndex];
 }
 
+
   </script>
+
+
+  <footer style="margin-top: 60px; font-size: 14px; color: white; text-shadow: 1px 1px black;">
+  checker made by Mallows, Music by Mr.Bboga
+</footer>
 
 </body>
 </html>
