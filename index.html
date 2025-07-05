@@ -4,19 +4,18 @@
   <meta charset="UTF-8">
   <title>$TAKE Allocation Checker</title>
   <style>
-body {
-  background: url('bg.jpg') no-repeat center top;
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center center;
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding-top: 320px; /* adjust based on your header image */
-}
-
+    body {
+      background: url('bg.jpg') no-repeat center top;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 320px; /* adjust if header image changes */
+    }
 
     input[type="text"] {
       width: 600px;
@@ -52,14 +51,27 @@ body {
       justify-content: center;
       border-radius: 12px;
     }
+
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: white;
+      text-shadow: 1px 1px black;
+    }
   </style>
 </head>
 <body>
-  <h1 style="color: white; margin-top: 30px;">$TAKE allocation checker</h1>
+
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
   <input type="text" id="address" placeholder="enter your address here">
   <button onclick="checkAllocation()">CHECK</button>
 
   <div id="output"></div>
+
+  <footer>
+    checker made by Mallows, Music by Mr.Bboga
+  </footer>
 
   <script>
     const messages = [
@@ -84,35 +96,27 @@ body {
       "No $TAKE here 🙈 But if you're reading this, you're probably part of the early crew 👀 Stay on it",
       "Just for fun 🎉 But Overtake World is serious business 🧩 $TAKE will reward those who took the time"
     ];
-</script>
-<script>
-  function checkAllocation() {
-    const input = document.getElementById("address").value.trim();
 
-    if (input === "") {
-      alert("Please enter your address first.");
-      return;
+    function checkAllocation() {
+      const input = document.getElementById("address").value.trim();
+
+      if (input === "") {
+        alert("Please enter your address first.");
+        return;
+      }
+
+      const sound = document.getElementById("clickSound");
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch((e) => {
+          console.log("Autoplay blocked or error:", e);
+        });
+      }
+
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("output").innerText = messages[randomIndex];
     }
-
-    // Play sound if available
-    const sound = document.getElementById("clickSound");
-    if (sound) {
-      sound.currentTime = 0;
-      sound.play().catch((e) => {
-        console.log("Autoplay blocked or error playing sound:", e);
-      });
-    }
-
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    document.getElementById("output").innerText = messages[randomIndex];
-  }
-</script>
-
-
-
-  <footer style="margin-top: 60px; font-size: 14px; color: white; text-shadow: 1px 1px black;">
-  checker made by Mallows, Music by Mr.Bboga
-</footer>
+  </script>
 
 </body>
 </html>
