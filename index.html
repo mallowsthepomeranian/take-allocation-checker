@@ -85,10 +85,18 @@ body {
       "Just for fun 🎉 But Overtake World is serious business 🧩 $TAKE will reward those who took the time"
     ];
 
-    function checkAllocation() {
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById("output").innerText = messages[randomIndex];
-    }
+function checkAllocation() {
+  const input = document.getElementById("address").value.trim();
+
+  if (input === "") {
+    alert("Please enter your address first.");
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * messages.length);
+  document.getElementById("output").innerText = messages[randomIndex];
+}
+
   </script>
 
 </body>
